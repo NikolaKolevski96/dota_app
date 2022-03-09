@@ -5,7 +5,7 @@ import {shared} from './../styles/shared'
 import '@vaadin/combo-box/vaadin-combo-box'
 import '@vaadin/progress-bar/vaadin-progress-bar'
 
-import logo from './../img/heroes/Crystal_Maiden_icon.png'
+import logo from './../img/heroes/abaddon.png'
 import clinkz from './../img/heroes/Clinkz_icon.png'
 import bane from './../img/heroes/Bane_icon.png'
 import ember_spirit from './../img/heroes/Ember_Spirit_icon.png'
@@ -1062,7 +1062,7 @@ static get styles() { return shared.concat(
               placeholder="Search hero..."
               style="width:70%;"
               clear-button-visible
-              .label="Find your hero"
+              label="Find your hero"
               item-label-path="localized_name"
               item-value-path="id"
               clear-button-visible
@@ -1149,7 +1149,7 @@ static get styles() { return shared.concat(
               placeholder="Search hero..."
               style="width:70%;"
               clear-button-visible
-              .label="Find your hero"
+              label="Find your hero"
               item-label-path="localized_name"
               item-value-path="id"
               clear-button-visible
@@ -1236,10 +1236,25 @@ static get styles() { return shared.concat(
   calculateStats() {
     console.log(this.radiantHeroId)
     console.log(this.direHeroIds)
+    let payload = { 
+        radiantTeam: this.radiantHeroId, 
+        direTeam: this.direHeroIds
+    }
+    fetch('http://localhost:8080/match', {
+        method: 'POST',
+        headers: {
+            "Content-Type": "text/plain"
+        },
+        body: JSON.stringify(payload)}).then(res =>{
+            debugger
+        })
+        .then(res => {
+            debugger
+            // The response has an `any` type, so we need to cast
+            // it to the `User` type, and return it from the promise
 
-
-
-
+            return res 
+    })
   }
 
   private onSelectedRadiant(e: CustomEvent) {

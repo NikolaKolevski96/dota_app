@@ -31,6 +31,7 @@ export class MyElement extends LitElement {
   @property({ type: Number })
   page = 0
 
+  
   render() {
     return html`
       <dota-header

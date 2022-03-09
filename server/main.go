@@ -1,10 +1,32 @@
 package main
 
 import (
-	"github.com/nikolakolevski96/dota_app/server/app"
+	"encoding/json"
+	"fmt"
+	"log"
+	"net/http"
 )
 
-func main() {
+type Match struct {
+	radiantHeroId []int `json:"radiantTeam"`
+	direHeroId    []int `json:"direTeam"`
+}
 
-	app.StartApplication()
+func helloHandler(w http.ResponseWriter, req *http.Request) {
+	decoder := json.NewDecoder(req.Body)
+	var t Match
+	err := decoder.Decode(&t)
+	if err != nil {
+		panic(err)
+	}
+	log.Println(t)
+}
+
+func main() {
+	http.HandleFunc("/match", helloHandler) // Update this line of code
+
+	fmt.Printf("Starting server at port 8080\n")
+	if err := http.ListenAndServe(":8080", nil); err != nil {
+		log.Fatal(err)
+	}
 }

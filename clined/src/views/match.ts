@@ -6,12 +6,7 @@ import '@vaadin/combo-box/vaadin-combo-box'
 import '@vaadin/progress-bar/vaadin-progress-bar'
 
 import logo from './../img/heroes/Crystal_Maiden_icon.png'
-import clinkz from './../img/heroes/Clinkz_icon.png'
-import bane from './../img/heroes/Bane_icon.png'
-import ember_spirit from './../img/heroes/Ember_Spirit_icon.png'
-import broodmother from './../img/heroes/Broodmother_icon.png'
-
-import {Hero, TeamStats} from '../types'
+import { Hero, TeamStats } from '../types'
 
 
 @customElement('match-view')
@@ -1048,6 +1043,33 @@ static get styles() { return shared.concat(
     width:50%;
     margin:1rem;
   }
+  .close-icon
+    {
+    box-sizing:border-box;
+    width:20px;
+    height:20px;
+    border-width:3px;
+    border-style: solid;
+    border-color:red;
+    border-radius:100%;
+    background: -webkit-linear-gradient(-45deg, transparent 0%, transparent 46%, white 46%,  white 56%,transparent 56%, transparent 100%), -webkit-linear-gradient(45deg, transparent 0%, transparent 46%, white 46%,  white 56%,transparent 56%, transparent 100%);
+    background-color:#c45c5c;
+    margin-bottom:-15px;
+    z-index:1000;
+    transition: all 0.3s ease;
+    }
+
+      .button {
+        display: none;
+      }
+      .wrapper:hover img {
+        /* Change the filter in here */
+      }
+      .wrapper:hover .button {
+        display: inline-block;
+        margin-right:-25px;
+        z-index:1000;
+      }
 
   `)}
 
@@ -1077,13 +1099,17 @@ static get styles() { return shared.concat(
 
             ${this.radiantHeroes.map((hero) => {
               return  html`
-                 <div  class="layout vertical" style=" padding:2px;height:142px;">
+                 <div  class="img-container layout vertical" style=" padding:2px;height:142px;">
                  <div  class="layout horizontal center center-center justified" style="height:30px;">
-                      <div class="layout flex"></div>
+                    <div class="close layout flex"></div>
+
                         ${ this.heroName(hero)}
                       <div class="layout flex"></div>
                   </div>
-                  <img style="height:98px;" src=${logo}/>
+                  <div class="wrapper">
+                    <a class="button close-icon" href="/jane/"></a>
+                    <img style="height:98px;" src=${logo}/>
+                </div>
 
                   <div  class="layout horizontal center center justified" style="height:30px; background-color:#ff9c9c; margin:5px;">
                       <div class="layout flex"></div>
